@@ -48,19 +48,31 @@ Player.prototype.render = function(){
 };
 
 Player.prototype.handleInput = function(keyCode){
-    switch (keyCode) {
-        case "up":
-            this.y -= 83;
-            break;
-        case "left":
-            this.x -= 102;
-            break;
-        case "down":
-            this.y += 83;
-            break;
-        case "right":
-            this.x += 102
-            break;
+    // switch (keyCode) {
+    //     case "up" && this.y > 0:
+    //         this.y -= 83;
+    //         break;
+    //     case "left":
+    //         this.x -= 102;
+    //         break;
+    //     case "down":
+    //         this.y += 83;
+    //         break;
+    //     case "right":
+    //         this.x += 102
+    //         break;
+    // }
+    if (keyCode === 'up' && this.y > 0){
+        this.y -= 83;
+    }
+    if (keyCode === 'left' && this.x > 0){
+        this.x -= 102;
+    }
+    if (keyCode === 'down' && this.y < 400){
+        this.y += 83;
+    }
+    if (keyCode === 'right' && this.x < 400){
+        this.x += 102;
     }
 };
 
