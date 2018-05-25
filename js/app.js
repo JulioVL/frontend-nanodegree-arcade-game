@@ -18,6 +18,11 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.speed * dt;
+
+    //Restart position when ending canvas x axis
+    if (this.x > 500) {
+        this.x = 0;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -28,7 +33,36 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function(x,y){
+    this.sprite = 'images/char_boy.png';
+    this.x = x;
+    this.y = y;
+};
 
+Player.prototype.update = function(){
+
+};
+
+Player.prototype.render = function(){
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Player.prototype.handleInput = function(keyCode){
+    switch (keyCode) {
+        case "up":
+            this.y += 83;
+            break;
+        case "left":
+            this.x -= 102;
+            break;
+        case "down":
+            this.y -= 83;
+            break;
+        case "right":
+            this.x += 102
+            break;
+    }
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
