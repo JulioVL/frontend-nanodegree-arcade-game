@@ -48,20 +48,7 @@ Player.prototype.render = function(){
 };
 
 Player.prototype.handleInput = function(keyCode){
-    // switch (keyCode) {
-    //     case "up" && this.y > 0:
-    //         this.y -= 83;
-    //         break;
-    //     case "left":
-    //         this.x -= 102;
-    //         break;
-    //     case "down":
-    //         this.y += 83;
-    //         break;
-    //     case "right":
-    //         this.x += 102
-    //         break;
-    // }
+    // Movement inside canvas
     if (keyCode === 'up' && this.y > 0){
         this.y -= 83;
     }
@@ -73,6 +60,25 @@ Player.prototype.handleInput = function(keyCode){
     }
     if (keyCode === 'right' && this.x < 400){
         this.x += 102;
+    }
+    //Reset when colission with enemies
+
+    ///For enemy 1
+    if (Math.abs(this.x - enemy1.x) < 15 && Math.abs(this.y - enemy1.y) < 15) {
+        this.x = 202;
+        this.y = 405;
+    }
+
+    ///For enemy 2
+    if (Math.abs(this.x - enemy2.x) < 15 && Math.abs(this.y - enemy2.y) < 15) {
+        this.x = 202;
+        this.y = 405;
+    }
+
+    ///For enemy 3
+    if (Math.abs(this.x - enemy3.x) < 15 && Math.abs(this.y - enemy3.y) < 15) {
+        this.x = 202;
+        this.y = 405;
     }
 };
 
