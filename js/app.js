@@ -24,6 +24,12 @@ Enemy.prototype.update = function(dt) {
         this.x = -40;
         this.speed = 100 + Math.floor(Math.random()*200);
     }
+
+    //Check colissions
+    if (Math.abs(this.x - player.x) < 50 && Math.abs(this.y - player.y) < 50) {
+        player.x = 202;
+        player.y = 405;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -61,25 +67,6 @@ Player.prototype.handleInput = function(keyCode){
     }
     if (keyCode === 'right' && this.x < 400){
         this.x += 102;
-    }
-    //Reset when colission with enemies
-
-    ///For enemy 1
-    if (Math.abs(this.x - enemy1.x) < 15 && Math.abs(this.y - enemy1.y) < 15) {
-        this.x = 202;
-        this.y = 405;
-    }
-
-    ///For enemy 2
-    if (Math.abs(this.x - enemy2.x) < 15 && Math.abs(this.y - enemy2.y) < 15) {
-        this.x = 202;
-        this.y = 405;
-    }
-
-    ///For enemy 3
-    if (Math.abs(this.x - enemy3.x) < 15 && Math.abs(this.y - enemy3.y) < 15) {
-        this.x = 202;
-        this.y = 405;
     }
 };
 
