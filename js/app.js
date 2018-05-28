@@ -17,7 +17,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.speed * dt;
+    this.x = this.x + this.speed * dt;
 
     //Restart position when ending canvas x axis
     if (this.x > 500) {
