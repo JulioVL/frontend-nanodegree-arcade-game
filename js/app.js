@@ -29,6 +29,7 @@ Enemy.prototype.update = function(dt) {
     if (Math.abs(this.x - player.x) < 50 && Math.abs(this.y - player.y) < 50) {
         player.x = 202;
         player.y = 405;
+        player.playerScore = 0;
     }
 };
 
@@ -44,6 +45,7 @@ var Player = function(x,y){
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+    this.playerScore = 0;
 };
 
 Player.prototype.update = function(){
@@ -52,6 +54,9 @@ Player.prototype.update = function(){
 
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.fillStyle = "white";
+    ctx.font = "20px hoge, impact";
+    ctx.fillText("Score: " + player.playerScore, 40, 90);
 };
 
 Player.prototype.handleInput = function(keyCode){
@@ -68,6 +73,16 @@ Player.prototype.handleInput = function(keyCode){
     if (keyCode === 'right' && this.x < 400){
         this.x += 102;
     }
+    //Execute reachWater when y position = -10
+    if (this.y === -10) {
+        this.reachWater();
+    }
+};
+
+Player.prototype.reachWater = function(){
+    this.playerScore += 10;
+    this.x = 202;
+    this.y = 405;
 };
 
 // Now instantiate your objects.
