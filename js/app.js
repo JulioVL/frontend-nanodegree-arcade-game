@@ -21,7 +21,8 @@ Enemy.prototype.update = function(dt) {
 
     //Restart position when ending canvas x axis
     if (this.x > 500) {
-        this.x = 0;
+        this.x = -40;
+        this.speed = 100 + Math.floor(Math.random()*200);
     }
 };
 
@@ -85,9 +86,9 @@ Player.prototype.handleInput = function(keyCode){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const enemy1 = new Enemy(0, 63, 100);
-const enemy2 = new Enemy(0, 147, 100);
-const enemy3 = new Enemy(0, 230, 100);
+const enemy1 = new Enemy(0, 63, 1200);
+const enemy2 = new Enemy(0, 147, 1200);
+const enemy3 = new Enemy(0, 230, 1200);
 const allEnemies = [enemy1, enemy2, enemy3];
 
 const player = new Player(202, 405);
