@@ -84,7 +84,7 @@ Gem.prototype.update = function(dt) {
 
 // Draw the gem on the screen, required method for game
 Gem.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.gemColor), this.x, this.y);
+    ctx.drawImage(Resources.get(this.gemColor), this.x, this.y, 100, 130);
 };
 
 
