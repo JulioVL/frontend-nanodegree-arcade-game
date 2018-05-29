@@ -67,8 +67,6 @@ var Gem = function(y, color) {
             break;
     }
     this.y = y;
-
-    console.log(this.gemColor + ', x: ' + this.x + ',y ' + this.y);
 };
 
 // Update the gem's position, required method for game
@@ -134,6 +132,17 @@ Player.prototype.reachWater = function(){
     this.x = 202;
     this.y = 405;
 };
+
+Player.prototype.win = function(){
+    if (this.playerScore >= 200) {
+        ctx.fillStyle = 'black';
+        //ctx.fillRect(135,210, 250, 150);
+        ctx.fillRect(0,210, 520, 150);
+        ctx.fillStyle = "white";
+        ctx.font = "50px hoge, impact";
+        ctx.fillText("YOU WON!!", 160, 300);
+    }    
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
