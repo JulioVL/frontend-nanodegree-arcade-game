@@ -38,6 +38,56 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+// Gems our player must obtain
+var Gem = function(y, color) {
+    // Variables applied to each of our instances go here,
+    // we've provided one for you to get started
+
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
+    this.gemColor = 'images/Gem '+color+'.png';
+    //Code from: https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+    const gemX = Math.floor(Math.random() * 5);
+    switch (gemX) {
+        case 0:
+            this.x = -2;
+            break;
+        case 1:
+            this.x = 100;
+            break;
+        case 2:
+            this.x = 202;
+            break;
+        case 3:
+            this.x = 304;
+            break;
+        case 4:
+            this.x = 406;
+            break;
+    }
+    this.y = y;
+
+    console.log(this.gemColor + ', x: ' + this.x + ',y ' + this.y);
+};
+
+// Update the gem's position, required method for game
+// Parameter: dt, a time delta between ticks
+Gem.prototype.update = function(dt) {
+    //Check colissions
+    if (Math.abs(this.x - player.x) < 50 && Math.abs(this.y - player.y) < 50) {
+        this.x = 1000;
+        this.y = 1000;
+        player.playerScore += 50;
+    }
+};
+
+// Draw the gem on the screen, required method for game
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.gemColor), this.x, this.y);
+};
+
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -87,13 +137,20 @@ Player.prototype.reachWater = function(){
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 const enemy1 = new Enemy(0, 63, 1200);
 const enemy2 = new Enemy(0, 147, 1200);
 const enemy3 = new Enemy(0, 230, 1200);
 const allEnemies = [enemy1, enemy2, enemy3];
 
+// Place the player object in a variable called player
 const player = new Player(202, 405);
+
+// Place the gem object in a variable called player
+const gem1 = new Gem(73,'Blue');
+const gem2 = new Gem(156,'Green');
+const gem3 = new Gem(239, 'Orange');
+
+const allGems = [gem1, gem2, gem3];
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
