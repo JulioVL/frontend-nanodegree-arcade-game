@@ -118,6 +118,7 @@ var Player = function(x,y){
     this.x = x;
     this.y = y;
     this.playerScore = 0;
+    this.pause = false;
 };
 
 Player.prototype.update = function(){
@@ -165,6 +166,7 @@ Player.prototype.win = function(){
         ctx.fillStyle = "white";
         ctx.font = "50px hoge, impact";
         ctx.fillText("YOU WON!!", 160, 300);
+        this.pause = true;
     }    
 }
 
@@ -200,6 +202,8 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
-    player.handleInput(allowedKeys[e.keyCode]);
+    if (!player.pause) {
+        player.handleInput(allowedKeys[e.keyCode]);
+    }
+    //player.handleInput(allowedKeys[e.keyCode]);
 });

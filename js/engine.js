@@ -44,12 +44,18 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-        update(dt);
+
+        //The game will pause when the player wins it
+        if (!player.pause) {
+            update(dt);
+        }
+
         render();
 
         //Reset the game when user presses the enter key
         document.addEventListener('keyup', function(e) {
             if (e.keyCode == 13) {
+                player.pause = false;
                 allGems.forEach(function(gem) {
                     gem.reset();
                 });
