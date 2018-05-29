@@ -1,31 +1,25 @@
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.speed = speed;
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+// Update the enemy's position
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + this.speed * dt;
 
-    //Restart position when ending canvas x axis
+    //Restart enemies position when reaching the end of the canvas
     if (this.x > 500) {
         this.x = -40;
         this.speed = 100 + Math.floor(Math.random()*200);
     }
 
-    //Check colissions
+    //Check colissions with player
     if (Math.abs(this.x - player.x) < 50 && Math.abs(this.y - player.y) < 50) {
         player.x = 202;
         player.y = 405;
@@ -33,22 +27,18 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 
-// Gems our player must obtain
+// Gems our player must obtain to get more points
 var Gem = function(y, color) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.gemColor = 'images/Gem '+color+'.png';
     //Code from: https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
     const gemX = Math.floor(Math.random() * 5);
+    //The gem has only 5 possible options for locations
     switch (gemX) {
         case 0:
             this.x = -2;
@@ -66,14 +56,14 @@ var Gem = function(y, color) {
             this.x = 406;
             break;
     }
+    //save the original y value for reset
     this.originY = y;
     this.y = y;
 };
 
-// Update the gem's position, required method for game
-// Parameter: dt, a time delta between ticks
+// Update the gem's position
 Gem.prototype.update = function(dt) {
-    //Check colissions
+    //Check colissions: put the gem out of canvas
     if (Math.abs(this.x - player.x) < 50 && Math.abs(this.y - player.y) < 50) {
         this.x = 1000;
         this.y = 1000;
@@ -81,7 +71,7 @@ Gem.prototype.update = function(dt) {
     }
 };
 
-// Draw the gem on the screen, required method for game
+// Draw the gem on the screen
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.gemColor), this.x, this.y, 100, 130);
 };
@@ -110,9 +100,7 @@ Gem.prototype.reset = function(){
 }
 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 var Player = function(x,y){
     this.sprite = 'images/char-boy.png';
     this.x = x;
@@ -127,9 +115,10 @@ Player.prototype.update = function(){
 
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    //Set player score
     ctx.fillStyle = "white";
     ctx.font = "20px hoge, impact";
-    ctx.fillText("Score: " + player.playerScore, 40, 90);
+    ctx.fillText("Score: " + this.playerScore, 40, 90);
 };
 
 Player.prototype.handleInput = function(keyCode){
@@ -158,10 +147,10 @@ Player.prototype.reachWater = function(){
     this.y = 405;
 };
 
+//when score reaches 200 points, show message and pause the game
 Player.prototype.win = function(){
     if (this.playerScore >= 200) {
         ctx.fillStyle = 'black';
-        //ctx.fillRect(135,210, 250, 150);
         ctx.fillRect(0,210, 520, 150);
         ctx.fillStyle = "white";
         ctx.font = "50px hoge, impact";
@@ -176,7 +165,7 @@ Player.prototype.reset = function(){
     this.playerScore = 0;
 }
 
-// Now instantiate your objects.
+//Instantiate all objects
 // Place all enemy objects in an array called allEnemies
 const enemy1 = new Enemy(0, 63, 1200);
 const enemy2 = new Enemy(0, 147, 1200);
@@ -186,15 +175,15 @@ const allEnemies = [enemy1, enemy2, enemy3];
 // Place the player object in a variable called player
 const player = new Player(202, 405);
 
-// Place the gem object in a variable called player
+// Place all gem objects in an array called allGems
 const gem1 = new Gem(73,'Blue');
 const gem2 = new Gem(156,'Green');
 const gem3 = new Gem(239, 'Orange');
 
 const allGems = [gem1, gem2, gem3];
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for key presses and sends the keys to the
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
@@ -202,8 +191,8 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
+    //This prevents the user to move the player when winning the game
     if (!player.pause) {
         player.handleInput(allowedKeys[e.keyCode]);
     }
-    //player.handleInput(allowedKeys[e.keyCode]);
 });
