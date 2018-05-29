@@ -66,6 +66,7 @@ var Gem = function(y, color) {
             this.x = 406;
             break;
     }
+    this.originY = y;
     this.y = y;
 };
 
@@ -84,6 +85,29 @@ Gem.prototype.update = function(dt) {
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.gemColor), this.x, this.y, 100, 130);
 };
+
+//Reset game for Gems
+Gem.prototype.reset = function(){
+    const gemX = Math.floor(Math.random() * 5);
+    switch (gemX) {
+        case 0:
+            this.x = -2;
+            break;
+        case 1:
+            this.x = 100;
+            break;
+        case 2:
+            this.x = 202;
+            break;
+        case 3:
+            this.x = 304;
+            break;
+        case 4:
+            this.x = 406;
+            break;
+    }
+    this.y = this.originY;;
+}
 
 
 // Now write your own player class
@@ -142,6 +166,12 @@ Player.prototype.win = function(){
         ctx.font = "50px hoge, impact";
         ctx.fillText("YOU WON!!", 160, 300);
     }    
+}
+
+Player.prototype.reset = function(){
+    this.x = 202;
+    this.y = 405;
+    this.playerScore = 0;
 }
 
 // Now instantiate your objects.

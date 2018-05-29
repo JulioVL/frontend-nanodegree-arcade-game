@@ -47,6 +47,16 @@ var Engine = (function(global) {
         update(dt);
         render();
 
+        //Reset the game when user presses the enter key
+        document.addEventListener('keyup', function(e) {
+            if (e.keyCode == 13) {
+                allGems.forEach(function(gem) {
+                    gem.reset();
+                });
+                player.reset();
+            }
+        });
+
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
