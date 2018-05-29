@@ -1,3 +1,79 @@
 body {
     text-align: center;
+    font-family: 'Bowlby One SC', cursive;
+    color: #ED9C28;
+}
+
+h1{
+	margin: 10px 0px 0px 0px;
+}
+
+h3 {
+	position: absolute;
+	left: 0;
+	top: 15%;
+	width: 21%;
+	margin: auto;
+	color: darkcyan;
+	font-weight: normal;
+}
+
+#manual{
+	position: absolute;
+	left: 0;
+	top: 32%;
+	width: 18%;
+	list-style-type: none;
+	padding-left: 3%;
+	text-align: left;
+	font-size: 90%;
+}
+
+#restart{
+	position: absolute;
+	left: 78%;
+	top: 16%;
+	width: 12%;
+	font-size: 130%;
+	color: tomato;
+}
+
+
+
+@media only screen and (min-width: 950px) {
+    h3{
+    	left: 1%;
+    }
+    #manual{
+    	left: 1%;
+    }
+}
+
+
+@media only screen and (min-width: 1040px) {
+    h3{
+    	left: 5%;
+    	top: 18%;
+    }
+    #manual{
+    	left: 5%;
+    	top: 28%;
+    }
+    #restart{
+		left: 74%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    h3{
+    	left: 8%;
+    	top: 18%;
+    }
+    #manual{
+    	left: 8%;
+    	top: 28%;
+    }
+    #restart{
+		left: 70%;
+    }
 }
